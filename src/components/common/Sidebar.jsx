@@ -1,4 +1,4 @@
-import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material";
+import { Box, Divider, Drawer, List, Typography } from "@mui/material";
 import React from "react";
 import { links } from "../../data/links";
 import SidebarItem from "./SidebarItem";
@@ -8,14 +8,8 @@ const Sidebar = ({ window, sideBarWidth, mobileOpen, handleDrawerToggle }) => {
   const drawer = (
     <div className="py-4">
       <Box sx={{color:"white", fontWeight:"bold", mb:"1rem", textAlign:"center", padding:"1rem"}}>
-        <img
-          src="/agab.jpeg"
-          alt="Logo"
-          width="80"
-          style={{ margin: "auto" }}
-        />
         <Typography variant="h6" sx={{ fontWeight: "bold", ml: 2, textAlign:"center" }}>
-          AgabConstruction
+          Dianga Estate
         </Typography>
       </Box>
       <Divider />

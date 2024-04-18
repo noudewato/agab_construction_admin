@@ -35,12 +35,14 @@ import {
   Users,
   AddNewUser,
   EditUser,
-  Profile
+  Profile,
 } from "./pages";
+import TestApp from "./TestApp";
 
 const App = () => {
   return (
     <Routes>
+      <Route path="/testapp" element={<TestApp />} />
       <Route path="/" element={<SignIn />} />
       {/* <Route path="/realisations" element={<Realisation />} />
       <Route path="/services" element={<Services />} />
@@ -69,7 +71,10 @@ const App = () => {
         path="/parcelles/modifier-une-parcelle/:id"
         element={<EditLandProperty />}
       />
-      <Route path="/parcelles/detail-parcelle/:id" element={<LandPropertyDetails />} />
+      <Route
+        path="/parcelles/detail-parcelle/:id"
+        element={<LandPropertyDetails />}
+      />
       {/* LAND PROPERTIES ROUTE  */}
 
       {/* PRODUCTS ROUTE  */}
@@ -119,10 +124,7 @@ const App = () => {
       {/* USERS ROUTE  */}
 
       {/* PROFILE ROUTE  */}
-      <Route
-        path="/profile"
-        element={<Profile />}
-      />
+      <Route path="/profile" element={<Profile />} />
       {/* PROFILE ROUTE  */}
       <Route path="/products/categories" element={<ProductCategories />} />
       {/* <Route path="*" element={<PageNotFound />} /> */}

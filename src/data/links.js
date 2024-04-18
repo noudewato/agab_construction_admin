@@ -13,12 +13,12 @@ import {
 
 export const links = [
   {
-    name: "Tableau de Bord",
+    name: "Dashboard",
     icon: <FiHome />,
     url: "/dashboard",
   },
   {
-    name: "Parcelles",
+    name: "Land",
     icon: <FiShoppingBag />,
     subLinks: [
       {

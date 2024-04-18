@@ -29,7 +29,7 @@ const SignIn = () => {
         password: values.password,
       }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/dashbord");
+      navigate("/dashboard");
 
       setSubmitting(false);
     } catch (error) {
@@ -48,7 +48,7 @@ const SignIn = () => {
     <div className="bg-gray-100 flex justify-center items-center h-screen">
       <div className="w-1/2 h-screen hidden lg:block">
         <img
-          src="/agab.jpeg"
+          src="https://graphicsfamily.com/wp-content/uploads/edd/2020/04/house-apartment-logo-blue-png-transparent.png"
           alt="agabimage"
           className="object-cover w-full h-full"
         />
