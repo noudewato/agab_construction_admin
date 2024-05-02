@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { BiImageAdd } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import { useCreateProductMutation } from "../store/slices/productsSlice";
@@ -31,9 +31,9 @@ const AddNewProduct = () => {
   };
 
   const validationSchema = Yup.object({
-    productName: Yup.string().min(3).required("productName is required"),
-    productPrice: Yup.string().required("productPrice is required"),
-    productCategory: Yup.string().required("productCategory is required"),
+    productName: Yup.string().min(3).required("item is required"),
+    productPrice: Yup.string().required("price is required"),
+    productCategory: Yup.string().required("category is required"),
   });
 
   const perset_key = "myPreset";
@@ -85,8 +85,8 @@ const AddNewProduct = () => {
         productDetails,
         images: images,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success("Nouveau product ajoute");
-      navigate("/agab-boutique");
+      toast.success("Item added successfully");
+      navigate("/items");
       setSubmitting(false);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -106,15 +106,14 @@ const AddNewProduct = () => {
   }, [loadPage]);
 
   const categories = [
-    { key: "Choisir une option", value: "" },
-    { key: "Broyeurs", value: "Broyeurs" },
-    { key: "Fer", value: "Fer" },
-    { key: "Marteaux", value: "Marteaux" },
-    { key: "Outils Manuels", value: "Outils Manuels" },
-    { key: "Perceuses", value: "Perceuses" },
-    { key: "Pinceau", value: "Pinceau" },
-    { key: "Scies", value: "Scies" },
-    { key: "Autres", value: "Autres" },
+    { key: "Select category", value: "" },
+    { key: "furniture", value: "Furniture" },
+    { key: "appliances", value: "Appliances" },
+    { key: "kitchenware", value: "Kitchenware" },
+    { key: "linens", value: "Linens" },
+    { key: "cleaning-supplies", value: "Cleaning Supplies" },
+    { key: "personal-items", value: "Personal Items" },
+    { key: "miscellaneous", value: "Miscellaneous" },
   ];
 
   return (
@@ -141,7 +140,26 @@ const AddNewProduct = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Nouveau Product
+            <Link to="/items">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "red",
+                    border: "1px solid red",
+                    color: "black",
+                  },
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            New Item
           </Typography>
           <Paper
             sx={{
@@ -167,7 +185,7 @@ const AddNewProduct = () => {
                     htmlFor="productName"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Nom du product*
+                    Item Name*
                   </label>
                   <Field
                     type="text"
@@ -175,7 +193,7 @@ const AddNewProduct = () => {
                     name="productName"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Brosse"
+                    placeholder="32INCHES LCD TV"
                   />
                   <ErrorMessage
                     name="productName"
@@ -189,7 +207,7 @@ const AddNewProduct = () => {
                     htmlFor="productCategory"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Category du produit*
+                    Category*
                   </label>
                   <Field
                     type="text"
@@ -198,7 +216,6 @@ const AddNewProduct = () => {
                     name="productCategory"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Brosse"
                   >
                     {categories.map((category) => (
                       <option key={category.value} value={category.value}>
@@ -218,7 +235,7 @@ const AddNewProduct = () => {
                     htmlFor="productPrice"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Prix*
+                    Price*
                   </label>
                   <Field
                     type="number"
@@ -240,7 +257,7 @@ const AddNewProduct = () => {
                     htmlFor="productDetails"
                     className="block text-black font-semibold mb-2"
                   >
-                    Details du produit*
+                    Item Details*
                   </label>
                   <div
                     style={{ height: "250px" }}
@@ -344,7 +361,7 @@ const AddNewProduct = () => {
                     variant="contained"
                     sx={{ borderRadius: "20px" }}
                   >
-                    Ajouter{isLoading && <>...</>}
+                    Save{isLoading && <>...</>}
                   </Button>
                 </Box>
               </Form>

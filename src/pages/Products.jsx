@@ -25,10 +25,10 @@ const Products = () => {
     useDeleteProductMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("etes vous sure de supprimer cet produit")) {
+    if (window.confirm("Are you sure you wish to delete this item")) {
       try {
         await deleteProduct(id);
-        toast.success("produit supprimee avec success");
+        toast.success("Item deleted successfully");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -68,8 +68,7 @@ const Products = () => {
             <img
               src={params.row.images[0]}
               alt={params.row.productName}
-              width="300px"
-              height="150px"
+              className="w-[300px] h-[150px] rounded-2xl"
             />
           </div>
         );
@@ -89,7 +88,7 @@ const Products = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Product</div>
+        <div className="text-xl text-dark font-bold">Item</div>
       ),
     },
     {
@@ -113,14 +112,13 @@ const Products = () => {
         return (
           <div className="p-[1px} text-secondary text-lg font-semibold">
             <span className="p-[1px} text-primary text-lg font-semibold">
-              {myCurrency.format(params.row.productPrice)}
-            </span>{" "}
-            FCFA
+             GH {myCurrency.format(params.row.productPrice)}
+            </span>
           </div>
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Prix</div>
+        <div className="text-xl text-dark font-bold">Price</div>
       ),
     },
     {
@@ -136,7 +134,7 @@ const Products = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Cree le</div>
+        <div className="text-xl text-dark font-bold">Created At</div>
       ),
     },
   ];
@@ -149,7 +147,7 @@ const Products = () => {
         return (
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Link
-              to={`detail-du-produit/${params.row._id}`}
+              to={`item-details/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "blue", fontSize: "1.5rem" }}>
@@ -157,7 +155,7 @@ const Products = () => {
               </Box>
             </Link>
             <Link
-              to={`modifier-cet-produit/${params.row._id}`}
+              to={`edit-item/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "green", fontSize: "1.5rem" }}>
@@ -236,10 +234,10 @@ const Products = () => {
             }}
           >
             <Typography variant="h4" sx={{ fontWeight: "600", color: "black" }}>
-              Nos Produits
+              Items
             </Typography>
             <Link
-              to="/agab-boutique/ajouter-un-produit"
+              to="/items/new-item"
               style={{ textDecoration: "none" }}
             >
               <Button
@@ -248,7 +246,7 @@ const Products = () => {
                 startIcon={<FiPlus />}
                 sx={{ borderRadius: "20px" }}
               >
-                Ajouter un produit
+                Add Item
               </Button>
             </Link>
           </Box>

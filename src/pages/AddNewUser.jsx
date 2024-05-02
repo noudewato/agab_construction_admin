@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import { useRegisterMutation } from "../store/slices/usersApiSlice";
@@ -81,8 +81,8 @@ const AddNewUser = () => {
         image: image,
       }).unwrap();
       // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success("Nouveau utilisateur ajoute");
-      navigate("/agab-utilisateur");
+      toast.success("User added successfully");
+      navigate("/users");
       setSubmitting(false);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -125,7 +125,26 @@ const AddNewUser = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Nouveau Utilisateur
+            <Link to="/users">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "red",
+                    border: "1px solid red",
+                    color: "black",
+                  },
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            New User
           </Typography>
           <Paper
             sx={{
@@ -202,32 +221,10 @@ const AddNewUser = () => {
                     <Box>
                       <div className="mb-4">
                         <label
-                          htmlFor="lastname"
-                          className="block text-black font-semibold mb-1-"
-                        >
-                          Noms*
-                        </label>
-                        <Field
-                          type="text"
-                          id="lastname"
-                          name="lastname"
-                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
-                          autoComplete="off"
-                        />
-                        <ErrorMessage
-                          name="lastname"
-                          component="div"
-                          className="text-sm text-red-500"
-                        />
-                      </div>
-                    </Box>
-                    <Box>
-                      <div className="mb-4">
-                        <label
                           htmlFor="firstname"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Prenoms*
+                          FirstName*
                         </label>
                         <Field
                           type="text"
@@ -235,6 +232,7 @@ const AddNewUser = () => {
                           name="firstname"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="John"
                         />
                         <ErrorMessage
                           name="firstname"
@@ -247,10 +245,34 @@ const AddNewUser = () => {
                     <Box>
                       <div className="mb-4">
                         <label
+                          htmlFor="lastname"
+                          className="block text-black font-semibold mb-1-"
+                        >
+                          Last Name*
+                        </label>
+                        <Field
+                          type="text"
+                          id="lastname"
+                          name="lastname"
+                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
+                          autoComplete="off"
+                          placeholder="Doe"
+                        />
+                        <ErrorMessage
+                          name="lastname"
+                          component="div"
+                          className="text-sm text-red-500"
+                        />
+                      </div>
+                    </Box>
+
+                    <Box>
+                      <div className="mb-4">
+                        <label
                           htmlFor="email"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Address email*
+                          Email*
                         </label>
                         <Field
                           type="text"
@@ -258,6 +280,7 @@ const AddNewUser = () => {
                           name="email"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="john@gmail.com"
                         />
                         <ErrorMessage
                           name="email"
@@ -273,7 +296,7 @@ const AddNewUser = () => {
                           htmlFor="phone"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Contact*
+                          Phone*
                         </label>
                         <Field
                           type="text"
@@ -281,6 +304,7 @@ const AddNewUser = () => {
                           name="phone"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="0245508127"
                         />
                         <ErrorMessage
                           name="phone"
@@ -295,7 +319,7 @@ const AddNewUser = () => {
                         htmlFor="phone"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Administrateur ?
+                        isAdmin ?
                       </label>{" "}
                       <FormControlLabel
                         checked={isAdmin}
@@ -315,9 +339,9 @@ const AddNewUser = () => {
                       <Button
                         type="submit"
                         variant="contained"
-                        sx={{ borderRadius: "20px", width:"100%" }}
+                        sx={{ borderRadius: "20px", width: "100%" }}
                       >
-                        Ajouter{isLoading && <>...</>}
+                        Save{isLoading && <>...</>}
                       </Button>
                     </Box>
                   </Grid>

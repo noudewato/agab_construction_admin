@@ -52,10 +52,10 @@ const Dashboard = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (!userInfo) {
+    if (!userInfo?.jwt_auth) {
       navigate("/login");
     }
-  }, [navigate, userInfo]);
+  }, [navigate, userInfo?.jwt_auth]);
 
   const ComponentWrapper = styled(Box)({
     marginTop: "10px",
@@ -96,7 +96,7 @@ const Dashboard = () => {
 
         <ComponentWrapper>
           <Typography variant="h5" sx={{ my: 3 }}>
-            Nouveau Produit
+            Items
           </Typography>
           {isLoading ? (
             <>...Loading</>
@@ -108,10 +108,10 @@ const Dashboard = () => {
                 <TableHead>
                   <TableRow>
                     <StyledTableCell>Image</StyledTableCell>
-                    <StyledTableCell>Produit</StyledTableCell>
-                    <StyledTableCell>Prix</StyledTableCell>
-                    <StyledTableCell>Cree le</StyledTableCell>
-                    <StyledTableCell>Action</StyledTableCell>
+                    <StyledTableCell>Item</StyledTableCell>
+                    <StyledTableCell>Price</StyledTableCell>
+                    <StyledTableCell>Created At</StyledTableCell>
+                    <StyledTableCell>Actions</StyledTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

@@ -2,7 +2,7 @@ import { Box, Button, Paper, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { BiImageAdd } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import {
@@ -54,15 +54,14 @@ const EditProduct = () => {
   });
 
   const categories = [
-    { key: "Choisir une option", value: "" },
-    { key: "Broyeurs", value: "Broyeurs" },
-    { key: "Fer", value: "Fer" },
-    { key: "Marteaux", value: "Marteaux" },
-    { key: "Outils Manuels", value: "Outils Manuels" },
-    { key: "Perceuses", value: "Perceuses" },
-    { key: "Pinceau", value: "Pinceau" },
-    { key: "Scies", value: "Scies" },
-    { key: "Autres", value: "Autres" },
+    { key: "Select category", value: "" },
+    { key: "furniture", value: "Furniture" },
+    { key: "appliances", value: "Appliances" },
+    { key: "kitchenware", value: "Kitchenware" },
+    { key: "linens", value: "Linens" },
+    { key: "cleaning-supplies", value: "Cleaning Supplies" },
+    { key: "personal-items", value: "Personal Items" },
+    { key: "miscellaneous", value: "Miscellaneous" }
   ];
 
   const perset_key = "myPreset";
@@ -111,10 +110,10 @@ const EditProduct = () => {
         productID,
         ...values,
         productDetails,
-        images
+        images,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success("produit modifie avec success");
-      navigate("/agab-boutique");
+      toast.success("Updated Successfully");
+      navigate("/items");
       setSubmitting(false);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -176,7 +175,26 @@ const EditProduct = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Nouveau Product
+            <Link to="/items">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "red",
+                    border: "1px solid red",
+                    color: "black",
+                  },
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            Update Product
           </Typography>
           <Paper
             sx={{
@@ -202,7 +220,7 @@ const EditProduct = () => {
                     htmlFor="productName"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Nom du product*
+                    Item Name*
                   </label>
                   <Field
                     type="text"
@@ -210,7 +228,7 @@ const EditProduct = () => {
                     name="productName"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Brosse"
+                    placeholder="32INCHES LCD TV"
                   />
                   <ErrorMessage
                     name="productName"
@@ -224,7 +242,7 @@ const EditProduct = () => {
                     htmlFor="productCategory"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Category du produit*
+                    Category*
                   </label>
                   <Field
                     type="text"
@@ -233,7 +251,6 @@ const EditProduct = () => {
                     name="productCategory"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Brosse"
                   >
                     {categories.map((category) => (
                       <option key={category.value} value={category.value}>
@@ -253,7 +270,7 @@ const EditProduct = () => {
                     htmlFor="productPrice"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Prix*
+                    Price*
                   </label>
                   <Field
                     type="number"
@@ -275,7 +292,7 @@ const EditProduct = () => {
                     htmlFor="productDetails"
                     className="block text-black font-semibold mb-2"
                   >
-                    Details du produit*
+                    Item Details*
                   </label>
                   <div
                     style={{ height: "250px" }}
@@ -325,36 +342,44 @@ const EditProduct = () => {
                   />
                 </Box>
 
-                <div
-                  {...getRootProps()}
-                  className="flex justify-center items-center p-[20px] rounded-xl h-[200px] border-2 border-slate-300"
-                >
-                  <Box sx={{ textAlign: "center" }}>
-                    <BiImageAdd
-                      style={{ fontSize: "50px", color: "#027edd" }}
-                    />
-                    <input {...getInputProps()} />
-                    <Typography>
-                      Drop your image here or{" "}
-                      <span style={{ color: "#027edd", cursor: "pointer" }}>
-                        browse
-                      </span>
-                    </Typography>
-                    <Typography sx={{ fontSize: "12px" }}>
-                      JPG, PNG and GIF images are allowed
-                    </Typography>
-                  </Box>
-                </div>
-                <div className="image-preview-container">
-                  {images.map((image, index) => (
-                    <div key={index} className="image-preview">
-                      <img src={image} alt={`preview-${index}`} />
-                      <button onClick={() => handleDelete(index)}>
-                        Delete
-                      </button>
-                    </div>
-                  ))}
-                </div>
+                <Box>
+                  <label
+                    htmlFor="images"
+                    className="block text-black font-semibold mb-2"
+                  >
+                    Images*
+                  </label>
+                  <div
+                    {...getRootProps()}
+                    className="flex justify-center items-center p-[20px] rounded-xl h-[200px] border-2 border-slate-300"
+                  >
+                    <Box sx={{ textAlign: "center" }}>
+                      <BiImageAdd
+                        style={{ fontSize: "50px", color: "#027edd" }}
+                      />
+                      <input {...getInputProps()} />
+                      <Typography>
+                        Drop your image here or{" "}
+                        <span style={{ color: "#027edd", cursor: "pointer" }}>
+                          browse
+                        </span>
+                      </Typography>
+                      <Typography sx={{ fontSize: "12px" }}>
+                        JPG, PNG and GIF images are allowed
+                      </Typography>
+                    </Box>
+                  </div>
+                  <div className="image-preview-container">
+                    {images.map((image, index) => (
+                      <div key={index} className="image-preview">
+                        <img src={image} alt={`preview-${index}`} />
+                        <button onClick={() => handleDelete(index)}>
+                          Delete
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </Box>
 
                 {/* <ImageUploader/> */}
 
@@ -371,7 +396,7 @@ const EditProduct = () => {
                     variant="contained"
                     sx={{ borderRadius: "20px" }}
                   >
-                    Modifier{isLoading && <>...</>}
+                    Save{isLoading && <>...</>}
                   </Button>
                 </Box>
               </Form>

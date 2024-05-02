@@ -23,11 +23,11 @@ const TopCountries = () => {
   return (
     <Box sx={{ padding: "15px" }}>
       <Typography variant="h5" sx={{ fontWeight: "600" }}>
-        <span className="text-primary">Villes</span>/
-        <span className="text-secondary">Villages</span>
+        <span className="text-primary">Areas</span>/
+        <span className="text-secondary">Cities</span>
       </Typography>
       <Typography sx={{ fontSize: "16px", opacity: 0.7, fontWeight: "600" }}>
-        Nos proprietes dans differentes villes
+      Our company's properties in different locations
       </Typography>
       {loadProperties ? (
         <>...Loading</>

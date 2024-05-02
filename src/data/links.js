@@ -18,16 +18,16 @@ export const links = [
     url: "/dashboard",
   },
   {
-    name: "Land",
+    name: "Land Properties",
     icon: <FiShoppingBag />,
     subLinks: [
       {
-        name: "Nos Parcelles",
-        url: "/parcelles",
+        name: "Land Properties",
+        url: "/landproperties",
       },
       {
-        name: "Nouvelle Parcelle",
-        url: "/parcelles/ajouter-une-parcelle",
+        name: "Add Land Property",
+        url: "/landproperties/new-landproperty",
       },
       // {
       //   name: "Product Category",
@@ -36,17 +36,17 @@ export const links = [
     ],
   },
   {
-    name: "Proprietes",
+    name: "Properties",
     icon: <FiLayers />,
     // icon: <FiShoppingBag />,
     subLinks: [
       {
-        name: "Nos Proprietes",
-        url: "/agab-proprietes",
+        name: "Properties",
+        url: "/properties",
       },
       {
-        name: "Nouvelle Propriete",
-        url: "/agab-proprietes/ajouter-une-propriete",
+        name: "Add Property",
+        url: "/properties/new-property",
       },
       // {
       //   name: "Product Category",
@@ -56,16 +56,16 @@ export const links = [
   },
 
   {
-    name: "La boutique",
+    name: "Items",
     icon: <FaHandshake />,
     subLinks: [
       {
-        name: "Nos Produits",
-        url: "/agab-boutique",
+        name: "Items",
+        url: "/items",
       },
       {
-        name: "Nouveau Produit",
-        url: "/agab-boutique/ajouter-un-produit",
+        name: "Add Item",
+        url: "/items/new-item",
       },
       // {
       //   name: "Product Category",
@@ -75,16 +75,16 @@ export const links = [
   },
 
   {
-    name: "Utilisateurs",
+    name: "Users",
     icon: <FiUsers />,
     subLinks: [
       {
-        name: "Utilisateurs",
-        url: "/agab-utilisateur",
+        name: "Users",
+        url: "/users",
       },
       {
-        name: "Nouveau Utilisateur",
-        url: "/agab-utilisateur/ajouter-un-utilisateur",
+        name: "Add User",
+        url: "/users/add-user",
       },
     ],
   },
@@ -143,7 +143,7 @@ export const links = [
   //   url: "/reviews",
   // },
   {
-    name: "Paramettre",
+    name: "Settings",
     icon: <FiSettings />,
     subLinks: [
       {

@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import {
@@ -97,8 +97,8 @@ const EditUser = () => {
         image: image,
       }).unwrap();
       // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success("utilisateur modifie");
-      navigate("/agab-utilisateur");
+      toast.success("User updated successfully");
+      navigate("/users");
       setSubmitting(false);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -160,7 +160,26 @@ const EditUser = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Modifie Utilisateur
+            <Link to="/users">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "red",
+                    border: "1px solid red",
+                    color: "black",
+                  },
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            Update User
           </Typography>
           <Paper
             sx={{
@@ -237,32 +256,10 @@ const EditUser = () => {
                     <Box>
                       <div className="mb-4">
                         <label
-                          htmlFor="lastname"
-                          className="block text-black font-semibold mb-1-"
-                        >
-                          Noms*
-                        </label>
-                        <Field
-                          type="text"
-                          id="lastname"
-                          name="lastname"
-                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
-                          autoComplete="off"
-                        />
-                        <ErrorMessage
-                          name="lastname"
-                          component="div"
-                          className="text-sm text-red-500"
-                        />
-                      </div>
-                    </Box>
-                    <Box>
-                      <div className="mb-4">
-                        <label
                           htmlFor="firstname"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Prenoms*
+                          FirstName*
                         </label>
                         <Field
                           type="text"
@@ -270,6 +267,7 @@ const EditUser = () => {
                           name="firstname"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="John"
                         />
                         <ErrorMessage
                           name="firstname"
@@ -282,10 +280,34 @@ const EditUser = () => {
                     <Box>
                       <div className="mb-4">
                         <label
+                          htmlFor="lastname"
+                          className="block text-black font-semibold mb-1-"
+                        >
+                          Last Name*
+                        </label>
+                        <Field
+                          type="text"
+                          id="lastname"
+                          name="lastname"
+                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
+                          autoComplete="off"
+                          placeholder="Doe"
+                        />
+                        <ErrorMessage
+                          name="lastname"
+                          component="div"
+                          className="text-sm text-red-500"
+                        />
+                      </div>
+                    </Box>
+
+                    <Box>
+                      <div className="mb-4">
+                        <label
                           htmlFor="email"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Address email*
+                          Email*
                         </label>
                         <Field
                           type="text"
@@ -293,6 +315,7 @@ const EditUser = () => {
                           name="email"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="john@gmail.com"
                         />
                         <ErrorMessage
                           name="email"
@@ -308,7 +331,7 @@ const EditUser = () => {
                           htmlFor="phone"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Contact*
+                          Phone*
                         </label>
                         <Field
                           type="text"
@@ -316,6 +339,7 @@ const EditUser = () => {
                           name="phone"
                           className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                           autoComplete="off"
+                          placeholder="0245508127"
                         />
                         <ErrorMessage
                           name="phone"
@@ -330,7 +354,7 @@ const EditUser = () => {
                         htmlFor="phone"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Administrateur ?
+                        isAdmin ?
                       </label>{" "}
                       <FormControlLabel
                         checked={isAdmin}
@@ -352,7 +376,7 @@ const EditUser = () => {
                         variant="contained"
                         sx={{ borderRadius: "20px", width: "100%" }}
                       >
-                        Modifier{isLoading && <>...</>}
+                        Save{isLoading && <>...</>}
                       </Button>
                     </Box>
                   </Grid>

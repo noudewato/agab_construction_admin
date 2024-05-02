@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../store/slices/productsSlice";
 import Layout from "./Layout";
 
@@ -77,8 +77,40 @@ const ProductDetails = () => {
               marginBottom: "16px",
             }}
           >
-            <Typography variant="h4" sx={{ fontWeight: "600", color: "black" }}>
-              Details du Produit
+            <Typography
+              variant="div"
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Link to="/items">
+                <Typography
+                  variant="div"
+                  sx={{
+                    border: "1px solid blue",
+                    p: ".5rem",
+                    mr:"4px",
+                    borderRadius: "10px",
+                    backgroundColor: "blue",
+                    color: "white",
+                    ":hover": {
+                      backgroundColor: "red",
+                      border: "1px solid red",
+                      color: "black",
+                    },
+                  }}
+                >
+                  Go Back
+                </Typography>{" "}
+              </Link>{" "}
+              <Typography
+                variant="div"
+                sx={{ fontWeight: "600", color: "black", fontSize: "30px" }}
+              >
+                Item Details
+              </Typography>
             </Typography>
           </Box>
           <div className="grid md:grid-cols-4 gap-4 mt-5">

@@ -70,7 +70,7 @@ const AdminNavbar = ({ sideBarWidth, handleDrawerToggle }) => {
                   display: { xs: "none", sm: "block", fontWeight: "bold", color:"black" },
                 }}
               >
-                Bienvenue {userInfo?.firstname}
+                Welcome {userInfo?.name}
               </Typography>
             </Box>
             <Stack direction="row" spacing={1} alignItems="center">

@@ -32,7 +32,7 @@ const BarChart = () => {
         borderColor: "divider",
       }}
     >
-      <Typography variant="h5">Proprietes Recentes</Typography>
+      <Typography variant="h5">Recents Properties</Typography>
       {loadPage || isLoading ? (
         <>...Loading</>
       ) : error ? (

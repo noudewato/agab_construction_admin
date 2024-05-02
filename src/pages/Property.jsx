@@ -82,7 +82,7 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Propriete</div>
+        <div className="text-xl text-dark font-bold">Property Title</div>
       ),
     },
     {
@@ -94,14 +94,14 @@ const Property = () => {
             <span className="p-[1px}  text-lg font-semibold">
               {myCurrency.format(params.row.beds)}
             </span>
-            <div className="icon-box ml-2 !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
+            <div className="icon-box rounded-2xl flex align-middle ml-2 !w-7 !h-7 bg-primary/20 hover:!bg-primary/40 text-primary">
               <BiBed />
             </div>
           </div>
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Chambres</div>
+        <div className="text-xl text-dark font-bold">bedrooms</div>
       ),
     },
     {
@@ -110,20 +110,20 @@ const Property = () => {
       renderCell: (params) => {
         return (
           <div className="p-[1px} text-lg font-semibold">
-            {params.row.propertyStatus === "A Vendre" ? (
+            {params.row.propertyStatus === "For sale" ? (
               <span className="p-[1px} text-primary text-lg font-semibold">
-                {myCurrency.format(params.row.propertyPrice)}
                 <span className="p-[1px} text-secondary text-lg font-semibold">
-                  FCFA
-                </span>
+                  GH₵
+                </span>{" "}
+                {myCurrency.format(params.row.propertyPrice)}
               </span>
             ) : (
               <span className="p-[1px} text-primary text-lg font-semibold">
                 {myCurrency.format(params.row.propertyPrice)}
                 <span className="p-[1px} text-secondary text-lg font-semibold">
-                  FCFA
+                  GH₵
                 </span>
-                <span className="text-slate-900">/mois</span>
+                <span className="text-slate-900">/month</span>
                 <br />
                 {params.row.nightPrice === 0 ? (
                   <span className="p-[1px} text-primary hidden text-lg font-semibold">
@@ -133,9 +133,9 @@ const Property = () => {
                   <span className="p-[1px} text-primary text-lg font-semibold">
                     {myCurrency.format(params.row.nightPrice)}
                     <span className="p-[1px} text-secondary text-lg font-semibold">
-                      FCFA
+                      GH₵
                     </span>
-                    <span className="text-slate-900">/nuit</span>
+                    <span className="text-slate-900">/night</span>
                   </span>
                 )}
               </span>
@@ -144,7 +144,9 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Prix Achat/Location</div>
+        <div className="text-xl text-dark font-bold">
+          Selling Price/Renting Price
+        </div>
       ),
     },
     {
@@ -156,7 +158,7 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Ville/Village</div>
+        <div className="text-xl text-dark font-bold">Area/City</div>
       ),
     },
     {
@@ -170,7 +172,7 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Address</div>
+        <div className="text-xl text-dark font-bold">Location</div>
       ),
     },
     {
@@ -179,16 +181,16 @@ const Property = () => {
       renderCell: (params) => {
         return (
           <div className=" flex p-[1px] text-center text-white text-sm text-semibold">
-            {params.row.propertyStatus === "A Vendre" ? (
-              <div className="p-[4px]  bg-secondary rounded-md">A Vendre</div>
+            {params.row.propertyStatus === "For sale" ? (
+              <div className="p-[4px]  bg-secondary rounded-md">For sale</div>
             ) : (
-              <div className="p-[4px] bg-primary rounded-md">A Louer</div>
+              <div className="p-[4px] bg-primary rounded-md">For rent</div>
             )}
           </div>
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Vendre/Louer</div>
+        <div className="text-xl text-dark font-bold">For sale/for rent</div>
       ),
     },
     {
@@ -202,7 +204,7 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Type de propriete</div>
+        <div className="text-xl text-dark font-bold">Property Type</div>
       ),
     },
     {
@@ -218,7 +220,7 @@ const Property = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Cree le</div>
+        <div className="text-xl text-dark font-bold">Created At</div>
       ),
     },
   ];
@@ -231,7 +233,7 @@ const Property = () => {
         return (
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Link
-              to={`detail-du-propriete/${params.row._id}`}
+              to={`/properties/property-details/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "blue", fontSize: "1.5rem" }}>
@@ -239,7 +241,7 @@ const Property = () => {
               </Box>
             </Link>
             <Link
-              to={`modifier-cette-propriete/${params.row._id}`}
+              to={`/properties/edit-property/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "green", fontSize: "1.5rem" }}>
@@ -318,10 +320,10 @@ const Property = () => {
             }}
           >
             <Typography variant="h4" sx={{ fontWeight: "600", color: "black" }}>
-              Nos Proprites
+              Properties
             </Typography>
             <Link
-              to="/agab-proprietes/ajouter-une-propriete"
+              to="/properties/new-property"
               style={{ textDecoration: "none" }}
             >
               <Button
@@ -330,7 +332,7 @@ const Property = () => {
                 startIcon={<FiPlus />}
                 sx={{ borderRadius: "20px" }}
               >
-                Ajouter une propriete
+                Add Property
               </Button>
             </Link>
           </Box>

@@ -5,12 +5,12 @@ export { default as AddLandProperty } from "./AddLandProperty";
 export { default as EditLandProperty } from "./EditLandProperty";
 export { default as ProductCategories } from "./ProductCategories";
 export { default as Settings } from "./Settings";
-export { default as SignIn } from "./auth/SignIn"
+export { default as SignIn } from "./auth/SignIn";
 export { default as Products } from "./Products";
 export { default as AddNewProduct } from "./AddNewProduct";
 export { default as EditProduct } from "./EditProduct";
 export { default as ProductDetails } from "./ProductDetails";
-export { default as Property } from "./Property"
+export { default as Property } from "./Property";
 export { default as AddProperty } from "./AddProperty";
 export { default as PropertyDetails } from "./PropertyDetails";
 export { default as EditProperty } from "./EditProperty";
@@ -18,3 +18,4 @@ export { default as Users } from "./Users";
 export { default as AddNewUser } from "./AddNewUser";
 export { default as EditUser } from "./EditUser";
 export { default as Profile } from "./Profile";
+export { default as TestPage } from "./TestPage";

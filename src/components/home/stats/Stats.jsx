@@ -73,7 +73,7 @@ const Stats = () => {
                 <IconButton color="primary">
                   <FiShoppingBag />
                 </IconButton>
-                Parcelles
+                Land Properties
               </Typography>
               <Typography
                 sx={{
@@ -111,7 +111,7 @@ const Stats = () => {
                 <IconButton color="error">
                   <FiHome />
                 </IconButton>
-                Proprietes
+                Properties
               </Typography>
               <Typography
                 sx={{
@@ -128,13 +128,13 @@ const Stats = () => {
                   <Typography key={index} sx={{ float: "right" }}>
                     {property === "A Louer" ? (
                       <span className="border p-1 rounded-lg font-semibold text-primary text-sm border-primary">
-                        A louer {propertyCount[property]}
+                        For sale {propertyCount[property]}
                       </span>
                     ) : (
                       <span>
                         <br />
                         <span className="border p-1 rounded-lg font-semibold text-secondary text-sm border-secondary">
-                          A vendre {propertyCount[property]}
+                          For rent {propertyCount[property]}
                         </span>
                       </span>
                     )}
@@ -166,7 +166,7 @@ const Stats = () => {
                 <IconButton color="secondary">
                   <FiShoppingCart />
                 </IconButton>
-                Produits
+                Items
               </Typography>
               <Typography
                 sx={{
@@ -204,7 +204,7 @@ const Stats = () => {
                 <IconButton color="warning">
                   <FiUsers />
                 </IconButton>
-                Utilisateurs
+                Users
               </Typography>
               <Typography
                 sx={{

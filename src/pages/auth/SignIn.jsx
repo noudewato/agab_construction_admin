@@ -19,7 +19,7 @@ const SignIn = () => {
 
   const validationSchema = Yup.object({
     email: Yup.string().email("invalid email").required("email is required"),
-    password: Yup.string().min(5).required("Password is required"),
+    password: Yup.string().min(4).required("Password is required"),
   });
 
   const onSubmit = async (values, { setSubmitting, setErrors }) => {
@@ -29,7 +29,7 @@ const SignIn = () => {
         password: values.password,
       }).unwrap();
       dispatch(setCredentials({ ...res }));
-      navigate("/dashboard");
+      navigate("/dashbord");
 
       setSubmitting(false);
     } catch (error) {
@@ -39,7 +39,7 @@ const SignIn = () => {
   };
 
   useEffect(() => {
-    if (userInfo) {
+    if (userInfo?.jwt_auth) {
       navigate("/dashboard");
     }
   }, [navigate, userInfo]);

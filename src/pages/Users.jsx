@@ -15,14 +15,14 @@ import { toast } from "react-toastify";
 const Users = () => {
   const { data: users, isLoading, error } = useAllUsersQuery();
 
-  const [deleteProduct, { isLoading: loadingDelete, refetch }] =
+  const [deleteUser, { isLoading: loadingDelete, refetch }] =
     useDeleteUserMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("etes vous sure de supprimer cet utilisateur")) {
+    if (window.confirm("Are you sure you wish to delete this user")) {
       try {
-        await deleteProduct(id);
-        toast.success("utilisateur supprime avec success");
+        await deleteUser(id);
+        toast.success("User deleted successfully");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -82,7 +82,7 @@ const Users = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Utilisateur</div>
+        <div className="text-xl text-dark font-bold">User</div>
       ),
     },
     {
@@ -133,7 +133,7 @@ const Users = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Rejoignez le</div>
+        <div className="text-xl text-dark font-bold">Joined</div>
       ),
     },
   ];
@@ -146,7 +146,7 @@ const Users = () => {
         return (
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Link
-              to={`modifier-cet-utilisateur/${params.row._id}`}
+              to={`edit-user/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "green", fontSize: "1.5rem" }}>
@@ -225,10 +225,10 @@ const Users = () => {
             }}
           >
             <Typography variant="h4" sx={{ fontWeight: "600", color: "black" }}>
-              Utilisateurs
+              Users
             </Typography>
             <Link
-              to="/agab-utilisateur/ajouter-un-utilisateur"
+              to="add-user"
               style={{ textDecoration: "none" }}
             >
               <Button
@@ -237,7 +237,7 @@ const Users = () => {
                 startIcon={<FiPlus />}
                 sx={{ borderRadius: "20px" }}
               >
-                Ajouter un utilisateur
+                Add User
               </Button>
             </Link>
           </Box>

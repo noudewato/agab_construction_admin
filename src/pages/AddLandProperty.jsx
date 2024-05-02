@@ -2,7 +2,7 @@ import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { BiImageAdd } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import { useCreateLandPropertyMutation } from "../store/slices/landPropertySlice";
@@ -25,32 +25,111 @@ const AddLandProperty = () => {
   console.log(images);
 
   const statusOption = [
-    { key: "Choisir une option", value: "" },
-    { key: "A vendre", value: "A vendre" },
-    { key: "A louer", value: "A louer" },
+    { key: "Choose an option", value: "" },
+    { key: "For sale", value: "For sale" },
+    { key: "For rent", value: "For rent" },
   ];
 
-  const typeOption = [
-    { key: "Choisir une option", value: "" },
-    { key: "Terrain Commercial", value: "Terrain Commercial" },
-    { key: "Terrain Industriel", value: "Terrain Industriel" },
-    { key: "Terrain Residentiel", value: "Terrain Residentiel" },
-    { key: "Terrain Agricole", value: "Terrain Agricole" },
-    { key: "Terrain Simple", value: "Terrain Simple" },
+  const typeOptions = [
+    { key: "Residential", value: "Residential Land" },
+    { key: "Commercial", value: "Commercial Land" },
+    { key: "Industrial", value: "Industrial Land" },
+    { key: "Agricultural", value: "Agricultural Land" },
+    { key: "Forest", value: "Forest Land" },
+    { key: "Rural", value: "Rural Land" },
+    { key: "Urban", value: "Urban Land" },
+    { key: "Vacant", value: "Vacant Land" },
+    { key: "Wetland", value: "Wetland" },
+    { key: "Recreational", value: "Recreational Land" },
   ];
 
   const towns = [
-    { key: "Choisissez une ville", value: "" },
-    { key: "Cotonou", value: "Cotonou" },
-    { key: "Porto-novo", value: "Porto-novo" },
-    { key: "Abomey-calavi", value: "Terrain Residentiel" },
-    { key: "Parakou", value: "Parakou" },
-    { key: "Djougou", value: "Djougou" },
-    { key: "Bohicon", value: "Bohicon" },
-    { key: "Kandi", value: "Kandi" },
-    { key: "Lokossa", value: "Lokossa" },
-    { key: "Ouidah", value: "Ouidah" },
-    { key: "Malanville", value: "Malanville" },
+    { key: "Choose a city", value: "" },
+    { key: "Accra", value: "Accra" },
+    { key: "Kumasi", value: "Kumasi" },
+    { key: "Sekondi-Takoradi", value: "Sekondi-Takoradi" },
+    { key: "Tamale", value: "Tamale" },
+    { key: "Tema", value: "Tema" },
+    { key: "Cape Coast", value: "Cape Coast" },
+    { key: "Obuasi", value: "Obuasi" },
+    { key: "Koforidua", value: "Koforidua" },
+    { key: "Sunyani", value: "Sunyani" },
+    { key: "Wa", value: "Wa" },
+    { key: "Ho", value: "Ho" },
+    { key: "Bolgatanga", value: "Bolgatanga" },
+    { key: "Techiman", value: "Techiman" },
+    { key: "Nsawam", value: "Nsawam" },
+    { key: "Winneba", value: "Winneba" },
+    { key: "Suhum", value: "Suhum" },
+    { key: "Ejura", value: "Ejura" },
+    { key: "Agogo", value: "Agogo" },
+    { key: "Akropong", value: "Akropong" },
+    { key: "Navrongo", value: "Navrongo" },
+    { key: "Tarkwa", value: "Tarkwa" },
+    { key: "Prestea", value: "Prestea" },
+    { key: "Dunkwa-on-Offin", value: "Dunkwa-on-Offin" },
+    { key: "Aburi", value: "Aburi" },
+    { key: "Axim", value: "Axim" },
+    { key: "Mampong", value: "Mampong" },
+    { key: "Berekum", value: "Berekum" },
+    { key: "Salaga", value: "Salaga" },
+    { key: "Swedru", value: "Swedru" },
+    { key: "Nkawkaw", value: "Nkawkaw" },
+    { key: "Bibiani", value: "Bibiani" },
+    { key: "Foso", value: "Foso" },
+    { key: "Konongo", value: "Konongo" },
+    { key: "Bawku", value: "Bawku" },
+    { key: "Aflao", value: "Aflao" },
+    { key: "Asamankese", value: "Asamankese" },
+    { key: "Akwatia", value: "Akwatia" },
+    { key: "Agona Swedru", value: "Agona Swedru" },
+    { key: "Anloga", value: "Anloga" },
+    { key: "Begoro", value: "Begoro" },
+    { key: "Duayaw Nkwanta", value: "Duayaw Nkwanta" },
+    { key: "Kintampo", value: "Kintampo" },
+    { key: "Saltpond", value: "Saltpond" },
+    { key: "Shama", value: "Shama" },
+    { key: "Apam", value: "Apam" },
+    { key: "Hohoe", value: "Hohoe" },
+    { key: "Elmina", value: "Elmina" },
+    { key: "Asankrangwa", value: "Asankrangwa" },
+    { key: "Akim Oda", value: "Akim Oda" },
+    { key: "Keta", value: "Keta" },
+    { key: "Kete Krachi", value: "Kete Krachi" },
+    { key: "Nungua", value: "Nungua" },
+    { key: "Kpandu", value: "Kpandu" },
+    { key: "Kete-Krachi", value: "Kete-Krachi" },
+    { key: "Wenchi", value: "Wenchi" },
+    { key: "Adenta East", value: "Adenta East" },
+    { key: "Agogo Ashanti", value: "Agogo Ashanti" },
+    { key: "Asamankese Eastern", value: "Asamankese Eastern" },
+    { key: "Bawku Upper East", value: "Bawku Upper East" },
+    { key: "Bolgatanga Upper East", value: "Bolgatanga Upper East" },
+    { key: "Duayaw Nkwanta Brong-Ahafo", value: "Duayaw Nkwanta Brong-Ahafo" },
+    { key: "Dunkwa Central", value: "Dunkwa Central" },
+    { key: "Dzodze", value: "Dzodze" },
+    { key: "Foso Central", value: "Foso Central" },
+    { key: "Kade Eastern", value: "Kade Eastern" },
+    { key: "Kibi Eastern", value: "Kibi Eastern" },
+    { key: "Konongo Ashanti", value: "Konongo Ashanti" },
+    { key: "Kpandu Volta", value: "Kpandu Volta" },
+    { key: "Mpraeso Eastern", value: "Mpraeso Eastern" },
+    { key: "Mumford", value: "Mumford" },
+    { key: "Nkawkaw Eastern", value: "Nkawkaw Eastern" },
+    { key: "Nsawam Eastern", value: "Nsawam Eastern" },
+    { key: "Nungua Greater Accra", value: "Nungua Greater Accra" },
+    { key: "Obuasi Municipal", value: "Obuasi Municipal" },
+    { key: "Salaga Northern", value: "Salaga Northern" },
+    { key: "Saltpond Central", value: "Saltpond Central" },
+    { key: "Sekondi-Takoradi Western", value: "Sekondi-Takoradi Western" },
+    { key: "Shama Western", value: "Shama Western" },
+    { key: "Sunyani Brong-Ahafo", value: "Sunyani Brong-Ahafo" },
+    { key: "Swedru Central", value: "Swedru Central" },
+    { key: "Tarkwa Western", value: "Tarkwa Western" },
+    { key: "Techiman Brong-Ahafo", value: "Techiman Brong-Ahafo" },
+    { key: "Tema Greater Accra", value: "Tema Greater Accra" },
+    { key: "Wenchi Brong-Ahafo", value: "Wenchi Brong-Ahafo" },
+    { key: "Winneba Central", value: "Winneba Central" },
   ];
 
   const initialValues = {
@@ -76,12 +155,12 @@ const AddLandProperty = () => {
 
   const onDrop = useCallback(async (acceptedFiles) => {
     const formData = new FormData();
-  
+
     acceptedFiles.forEach((file) => {
       formData.append("file", file);
       formData.append("upload_preset", preset_key); // Corrected typo here
     });
-  
+
     try {
       const response = await axios.post(
         `https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`,
@@ -92,14 +171,13 @@ const AddLandProperty = () => {
           },
         }
       );
-  
+
       // Update state with uploaded image URLs from Cloudinary
       setImages((prevImages) => [...prevImages, response.data.secure_url]);
     } catch (error) {
       console.error("Error uploading images:", error);
     }
   }, []);
-  
 
   const handleDelete = (index) => {
     const updatedImages = [...images];
@@ -115,8 +193,8 @@ const AddLandProperty = () => {
   const onSubmit = async (values, { setSubmitting }) => {
     try {
       await createLandProperty({
-      ...values,
-      propertyDetails,
+        ...values,
+        propertyDetails,
         images: images,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
       toast.success("Nouvelle parcelle ajoutee");
@@ -163,7 +241,26 @@ const AddLandProperty = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Nouvelle Parcelle
+            <Link to="/landproperties">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover":{
+                    backgroundColor:"red",
+                    border: "1px solid red",
+                    color: "black"
+                  }
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            New Land Property
           </Typography>
           <Paper
             sx={{
@@ -189,7 +286,7 @@ const AddLandProperty = () => {
                     htmlFor="propertyTitle"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Nom du parcelle*
+                    Land Tilte*
                   </label>
                   <Field
                     type="text"
@@ -197,7 +294,7 @@ const AddLandProperty = () => {
                     name="propertyTitle"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Disponible une parcelle de 2000m a kpota..."
+                    placeholder="Available to sell ..."
                   />
                   <ErrorMessage
                     name="propertyTitle"
@@ -211,7 +308,7 @@ const AddLandProperty = () => {
                     htmlFor="city"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Ville/Village*
+                    City*
                   </label>
                   <Field
                     as="select"
@@ -220,7 +317,6 @@ const AddLandProperty = () => {
                     name="city"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="A vendre"
                   >
                     {towns.map((town) => (
                       <option key={town.value} value={town.value}>
@@ -242,7 +338,7 @@ const AddLandProperty = () => {
                         htmlFor="propertyType"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Type de parcelle*
+                        Land Type*
                       </label>
                       <Field
                         as="select"
@@ -253,7 +349,7 @@ const AddLandProperty = () => {
                         autoComplete="off"
                         placeholder="A vendre"
                       >
-                        {typeOption.map((type) => (
+                        {typeOptions.map((type) => (
                           <option key={type.value} value={type.value}>
                             {type.key}
                           </option>
@@ -272,7 +368,7 @@ const AddLandProperty = () => {
                         htmlFor="propertyStatus"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Status du parcelle*
+                        Land Status*
                       </label>
                       <Field
                         as="select"
@@ -304,7 +400,7 @@ const AddLandProperty = () => {
                         htmlFor="propertyPrice"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Prix*
+                        Price*
                       </label>
                       <Field
                         type="number"
@@ -327,7 +423,7 @@ const AddLandProperty = () => {
                         htmlFor="propertyLocation"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Addresse*
+                        Location*
                       </label>
                       <Field
                         type="text"
@@ -335,7 +431,7 @@ const AddLandProperty = () => {
                         name="propertyLocation"
                         className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                         autoComplete="off"
-                        placeholder="address du terrain"
+                        placeholder="nungua near apostolic church..."
                       />
                       <ErrorMessage
                         name="propertyLocation"
@@ -351,7 +447,7 @@ const AddLandProperty = () => {
                     htmlFor="propertyDetails"
                     className="block text-black font-semibold mb-2"
                   >
-                    Details du parcelle*
+                    Land Details*
                   </label>
                   <div
                     style={{ height: "250px" }}
@@ -455,7 +551,7 @@ const AddLandProperty = () => {
                     variant="contained"
                     sx={{ borderRadius: "20px" }}
                   >
-                    Ajouter{isLoading && <>...</>}
+                    Save{isLoading && <>...</>}
                   </Button>
                 </Box>
               </Form>

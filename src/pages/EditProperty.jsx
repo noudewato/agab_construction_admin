@@ -2,7 +2,7 @@ import { Box, Button, Grid, Paper, Typography } from "@mui/material";
 import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 import { BiImageAdd } from "react-icons/bi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import {
@@ -39,32 +39,111 @@ const EditProperty = () => {
   console.log(images);
 
   const statusOption = [
-    { key: "Choisissez une option", value: "" },
-    { key: "A vendre", value: "A Vendre" },
-    { key: "A louer", value: "A Louer" },
+    { key: "Select an aoption", value: "" },
+    { key: "For sale", value: "For sale" },
+    { key: "For rent", value: "For rent" },
   ];
 
-  const typeOption = [
-    { key: "Choisissez une option", value: "" },
-    { key: "Villa", value: "Villa" },
-    { key: "Maison", value: "Maison" },
-    { key: "Appartement", value: "Appartement Meublee" },
-    { key: "Bureau", value: "Bureau" },
-    { key: "Espace Commercial", value: "Espace Commercial" },
+  const typeOptions = [
+    { key: "Residential", value: "Residential Land" },
+    { key: "Commercial", value: "Commercial Land" },
+    { key: "Industrial", value: "Industrial Land" },
+    { key: "Agricultural", value: "Agricultural Land" },
+    { key: "Forest", value: "Forest Land" },
+    { key: "Rural", value: "Rural Land" },
+    { key: "Urban", value: "Urban Land" },
+    { key: "Vacant", value: "Vacant Land" },
+    { key: "Wetland", value: "Wetland" },
+    { key: "Recreational", value: "Recreational Land" },
   ];
 
   const towns = [
-    { key: "Choisissez une ville", value: "" },
-    { key: "Cotonou", value: "Cotonou" },
-    { key: "Porto-novo", value: "Porto-novo" },
-    { key: "Abomey-calavi", value: "Terrain Residentiel" },
-    { key: "Parakou", value: "Parakou" },
-    { key: "Djougou", value: "Djougou" },
-    { key: "Bohicon", value: "Bohicon" },
-    { key: "Kandi", value: "Kandi" },
-    { key: "Lokossa", value: "Lokossa" },
-    { key: "Ouidah", value: "Ouidah" },
-    { key: "Malanville", value: "Malanville" },
+    { key: "Choose a city", value: "" },
+    { key: "Accra", value: "Accra" },
+    { key: "Kumasi", value: "Kumasi" },
+    { key: "Sekondi-Takoradi", value: "Sekondi-Takoradi" },
+    { key: "Tamale", value: "Tamale" },
+    { key: "Tema", value: "Tema" },
+    { key: "Cape Coast", value: "Cape Coast" },
+    { key: "Obuasi", value: "Obuasi" },
+    { key: "Koforidua", value: "Koforidua" },
+    { key: "Sunyani", value: "Sunyani" },
+    { key: "Wa", value: "Wa" },
+    { key: "Ho", value: "Ho" },
+    { key: "Bolgatanga", value: "Bolgatanga" },
+    { key: "Techiman", value: "Techiman" },
+    { key: "Nsawam", value: "Nsawam" },
+    { key: "Winneba", value: "Winneba" },
+    { key: "Suhum", value: "Suhum" },
+    { key: "Ejura", value: "Ejura" },
+    { key: "Agogo", value: "Agogo" },
+    { key: "Akropong", value: "Akropong" },
+    { key: "Navrongo", value: "Navrongo" },
+    { key: "Tarkwa", value: "Tarkwa" },
+    { key: "Prestea", value: "Prestea" },
+    { key: "Dunkwa-on-Offin", value: "Dunkwa-on-Offin" },
+    { key: "Aburi", value: "Aburi" },
+    { key: "Axim", value: "Axim" },
+    { key: "Mampong", value: "Mampong" },
+    { key: "Berekum", value: "Berekum" },
+    { key: "Salaga", value: "Salaga" },
+    { key: "Swedru", value: "Swedru" },
+    { key: "Nkawkaw", value: "Nkawkaw" },
+    { key: "Bibiani", value: "Bibiani" },
+    { key: "Foso", value: "Foso" },
+    { key: "Konongo", value: "Konongo" },
+    { key: "Bawku", value: "Bawku" },
+    { key: "Aflao", value: "Aflao" },
+    { key: "Asamankese", value: "Asamankese" },
+    { key: "Akwatia", value: "Akwatia" },
+    { key: "Agona Swedru", value: "Agona Swedru" },
+    { key: "Anloga", value: "Anloga" },
+    { key: "Begoro", value: "Begoro" },
+    { key: "Duayaw Nkwanta", value: "Duayaw Nkwanta" },
+    { key: "Kintampo", value: "Kintampo" },
+    { key: "Saltpond", value: "Saltpond" },
+    { key: "Shama", value: "Shama" },
+    { key: "Apam", value: "Apam" },
+    { key: "Hohoe", value: "Hohoe" },
+    { key: "Elmina", value: "Elmina" },
+    { key: "Asankrangwa", value: "Asankrangwa" },
+    { key: "Akim Oda", value: "Akim Oda" },
+    { key: "Keta", value: "Keta" },
+    { key: "Kete Krachi", value: "Kete Krachi" },
+    { key: "Nungua", value: "Nungua" },
+    { key: "Kpandu", value: "Kpandu" },
+    { key: "Kete-Krachi", value: "Kete-Krachi" },
+    { key: "Wenchi", value: "Wenchi" },
+    { key: "Adenta East", value: "Adenta East" },
+    { key: "Agogo Ashanti", value: "Agogo Ashanti" },
+    { key: "Asamankese Eastern", value: "Asamankese Eastern" },
+    { key: "Bawku Upper East", value: "Bawku Upper East" },
+    { key: "Bolgatanga Upper East", value: "Bolgatanga Upper East" },
+    { key: "Duayaw Nkwanta Brong-Ahafo", value: "Duayaw Nkwanta Brong-Ahafo" },
+    { key: "Dunkwa Central", value: "Dunkwa Central" },
+    { key: "Dzodze", value: "Dzodze" },
+    { key: "Foso Central", value: "Foso Central" },
+    { key: "Kade Eastern", value: "Kade Eastern" },
+    { key: "Kibi Eastern", value: "Kibi Eastern" },
+    { key: "Konongo Ashanti", value: "Konongo Ashanti" },
+    { key: "Kpandu Volta", value: "Kpandu Volta" },
+    { key: "Mpraeso Eastern", value: "Mpraeso Eastern" },
+    { key: "Mumford", value: "Mumford" },
+    { key: "Nkawkaw Eastern", value: "Nkawkaw Eastern" },
+    { key: "Nsawam Eastern", value: "Nsawam Eastern" },
+    { key: "Nungua Greater Accra", value: "Nungua Greater Accra" },
+    { key: "Obuasi Municipal", value: "Obuasi Municipal" },
+    { key: "Salaga Northern", value: "Salaga Northern" },
+    { key: "Saltpond Central", value: "Saltpond Central" },
+    { key: "Sekondi-Takoradi Western", value: "Sekondi-Takoradi Western" },
+    { key: "Shama Western", value: "Shama Western" },
+    { key: "Sunyani Brong-Ahafo", value: "Sunyani Brong-Ahafo" },
+    { key: "Swedru Central", value: "Swedru Central" },
+    { key: "Tarkwa Western", value: "Tarkwa Western" },
+    { key: "Techiman Brong-Ahafo", value: "Techiman Brong-Ahafo" },
+    { key: "Tema Greater Accra", value: "Tema Greater Accra" },
+    { key: "Wenchi Brong-Ahafo", value: "Wenchi Brong-Ahafo" },
+    { key: "Winneba Central", value: "Winneba Central" },
   ];
 
   const initialValues = {
@@ -141,8 +220,8 @@ const EditProperty = () => {
         ...values,
         images: images,
       }).unwrap(); // NOTE: here we need to unwrap the Promise to catch any rejection in our catch block
-      toast.success("propriete modifiee avec succes");
-      navigate("/agab-proprietes");
+      toast.success("property added successfully");
+      navigate("/properties");
       setSubmitting(false);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -185,7 +264,26 @@ const EditProperty = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Nouvelle Parcelle
+            <Link to="/properties">
+              <Typography
+                variant="div"
+                sx={{
+                  border: "1px solid blue",
+                  p: ".5rem",
+                  borderRadius: "10px",
+                  backgroundColor: "blue",
+                  color: "white",
+                  ":hover": {
+                    backgroundColor: "red",
+                    border: "1px solid red",
+                    color: "black",
+                  },
+                }}
+              >
+                Go Back
+              </Typography>{" "}
+            </Link>{" "}
+            Update Property
           </Typography>
           <Paper
             sx={{
@@ -211,7 +309,7 @@ const EditProperty = () => {
                     htmlFor="propertyTitle"
                     className="block text-black font-semibold mb-1-"
                   >
-                    Noms du propriete*
+                    Property Title*
                   </label>
                   <Field
                     type="text"
@@ -219,7 +317,7 @@ const EditProperty = () => {
                     name="propertyTitle"
                     className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                     autoComplete="off"
-                    placeholder="Disponible une parcelle de 2000m a kpota..."
+                    placeholder="3bdrm House in Fermay Plush, Accra Metropolitan for sale"
                   />
                   <ErrorMessage
                     name="propertyTitle"
@@ -235,7 +333,7 @@ const EditProperty = () => {
                         htmlFor="propertyPrice"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Prix d'Achat/Location*
+                        Selling Price/Renting Price*
                       </label>
                       <Field
                         type="number"
@@ -259,7 +357,7 @@ const EditProperty = () => {
                         htmlFor="nightPrice"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Prix d'une nuit
+                        Night Price
                       </label>
                       <Field
                         type="number"
@@ -282,7 +380,7 @@ const EditProperty = () => {
                         htmlFor="city"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Ville/Village*
+                        Area/City*
                       </label>
                       <Field
                         as="select"
@@ -315,7 +413,7 @@ const EditProperty = () => {
                         htmlFor="propertyLocation"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Addresse*
+                        Location*
                       </label>
                       <Field
                         type="text"
@@ -323,7 +421,7 @@ const EditProperty = () => {
                         name="propertyLocation"
                         className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                         autoComplete="off"
-                        placeholder="address du terrain"
+                        placeholder="Adenta opposite senior high scholl"
                       />
                       <ErrorMessage
                         name="propertyLocation"
@@ -338,7 +436,7 @@ const EditProperty = () => {
                         htmlFor="propertyType"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Type de propriete*
+                        Property Type*
                       </label>
                       <Field
                         as="select"
@@ -349,7 +447,7 @@ const EditProperty = () => {
                         autoComplete="off"
                         placeholder="A vendre"
                       >
-                        {typeOption.map((type) => (
+                        {typeOptions.map((type) => (
                           <option key={type.value} value={type.value}>
                             {type.key}
                           </option>
@@ -368,7 +466,7 @@ const EditProperty = () => {
                         htmlFor="propertyStatus"
                         className="block text-black font-semibold mb-1-"
                       >
-                        A Vendre/A Louer*
+                        For sale/For rent*
                       </label>
                       <Field
                         as="select"
@@ -400,7 +498,7 @@ const EditProperty = () => {
                         htmlFor="beds"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Nombre de chambres*
+                        Number of bedrooms*
                       </label>
                       <Field
                         type="number"
@@ -424,7 +522,7 @@ const EditProperty = () => {
                         htmlFor="bathrooms"
                         className="block text-black font-semibold mb-1-"
                       >
-                        Nombre de douches*
+                        Number of bathrooms*
                       </label>
                       <Field
                         type="number"
@@ -456,7 +554,7 @@ const EditProperty = () => {
                         name="dimensions"
                         className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
                         autoComplete="off"
-                        placeholder="address du terrain"
+                        placeholder="500m2"
                       />
                       <ErrorMessage
                         name="dimensions"
@@ -472,7 +570,7 @@ const EditProperty = () => {
                     htmlFor="propertyDetails"
                     className="block text-black font-semibold mb-2"
                   >
-                    Details du parcelle*
+                    Property Details*
                   </label>
                   <div
                     style={{ height: "250px" }}
@@ -515,11 +613,7 @@ const EditProperty = () => {
                       />
                     </div>
                   </div>
-                  {/* <ErrorMessage
-                    name="propertyDetails"
-                    component="div"
-                    className="text-sm text-red-500"
-                  /> */}
+                  {/* <div className="text-sm text-red-500">{errMesaage}</div> */}
                 </Box>
                 <Box sx={{ my: 2 }}>
                   <label
@@ -573,7 +667,7 @@ const EditProperty = () => {
                     variant="contained"
                     sx={{ borderRadius: "20px" }}
                   >
-                    Ajouter{isLoading && <>...</>}
+                    Save{isLoading && <>...</>}
                   </Button>
                 </Box>
               </Form>

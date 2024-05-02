@@ -93,7 +93,7 @@ const ProfileMenu = () => {
           >
             <MenuItem sx={{ fontWeight: "bold", color: "black" }}>
               <Avatar sx={{ width: 32, height: 32 }} src={userInfo?.image} />
-              {userInfo?.firstname}
+              {userInfo?.name}
             </MenuItem>
             <Divider />
             <MenuItem sx={{ fontWeight: "500", color: "black" }}>
@@ -102,7 +102,7 @@ const ProfileMenu = () => {
             <Divider />
             <MenuItem>
             <NavLink to="/profile">
-            Profile d'utilisateur
+            User Profile
             </NavLink>
              
             </MenuItem>
@@ -111,7 +111,7 @@ const ProfileMenu = () => {
               <ListItemIcon>
                 <Logout fontSize="small" />
               </ListItemIcon>
-              Se deconnecter
+              Logout
             </MenuItem>
           </Menu>
         </>

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import "./images.css";
 import { useUpdateUserProfileMutation } from "../store/slices/usersApiSlice";
-import {  useGetAllPropertiesQuery } from '../store/slices/propertySlice';
 import * as Yup from "yup";
 import Layout from "./Layout";
 import { toast } from "react-toastify";
@@ -128,7 +127,7 @@ const Profile = () => {
       ) : (
         <Box sx={{ pt: "80px", pb: "20px" }}>
           <Typography variant="h6" sx={{ marginBottom: "14px" }}>
-            Modifie Utilisateur
+            Update Profile
           </Typography>
           <Paper
             sx={{
@@ -202,35 +201,14 @@ const Profile = () => {
                     </Box>
                   </Grid>
                   <Grid item xs={12} sm={12} md={7} lg={7}>
-                    <Box>
-                      <div className="mb-4">
-                        <label
-                          htmlFor="lastname"
-                          className="block text-black font-semibold mb-1-"
-                        >
-                          Noms*
-                        </label>
-                        <Field
-                          type="text"
-                          id="lastname"
-                          name="lastname"
-                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
-                          autoComplete="off"
-                        />
-                        <ErrorMessage
-                          name="lastname"
-                          component="div"
-                          className="text-sm text-red-500"
-                        />
-                      </div>
-                    </Box>
+                   
                     <Box>
                       <div className="mb-4">
                         <label
                           htmlFor="firstname"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Prenoms*
+                          FirstName*
                         </label>
                         <Field
                           type="text"
@@ -250,10 +228,33 @@ const Profile = () => {
                     <Box>
                       <div className="mb-4">
                         <label
+                          htmlFor="lastname"
+                          className="block text-black font-semibold mb-1-"
+                        >
+                          LastName*
+                        </label>
+                        <Field
+                          type="text"
+                          id="lastname"
+                          name="lastname"
+                          className="w-full my-2 border-2 border-slate-300  rounded-md py-2 px-3 focus:outline-blue-500 focus:border-blue-500"
+                          autoComplete="off"
+                        />
+                        <ErrorMessage
+                          name="lastname"
+                          component="div"
+                          className="text-sm text-red-500"
+                        />
+                      </div>
+                    </Box>
+
+                    <Box>
+                      <div className="mb-4">
+                        <label
                           htmlFor="email"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Address email*
+                          Email*
                         </label>
                         <Field
                           type="text"
@@ -276,7 +277,7 @@ const Profile = () => {
                           htmlFor="password"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Mots de passe*
+                          Password*
                         </label>
                         <Field
                           type="text"
@@ -299,7 +300,7 @@ const Profile = () => {
                           htmlFor="confirmPassword"
                           className="block text-black font-semibold mb-1-"
                         >
-                          Confirme mot de passe*
+                          Confirm new Password*
                         </label>
                         <Field
                           type="text"
@@ -329,7 +330,7 @@ const Profile = () => {
                         variant="contained"
                         sx={{ borderRadius: "20px", width: "100%" }}
                       >
-                        Modifie Profile{isLoading && <>...</>}
+                        Save{isLoading && <>...</>}
                       </Button>
                     </Box>
                   </Grid>

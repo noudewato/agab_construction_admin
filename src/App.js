@@ -36,6 +36,7 @@ import {
   AddNewUser,
   EditUser,
   Profile,
+  TestPage,
 } from "./pages";
 import TestApp from "./TestApp";
 
@@ -44,81 +45,67 @@ const App = () => {
     <Routes>
       <Route path="/testapp" element={<TestApp />} />
       <Route path="/" element={<SignIn />} />
-      {/* <Route path="/realisations" element={<Realisation />} />
-      <Route path="/services" element={<Services />} />
-      <Route path="/a-vendre" element={<Avendre />} />
-      <Route path="/a-vendre/:id" element={<PropertyForSellDetails />} />
-      <Route path="/a-louer" element={<Alouer />} />
-      <Route path="/a-louer/:id" element={<PropertyForRentDetails />} />
-      <Route path="/parcelle" element={<Parcelle />} />
-      <Route path="/parcelle/:id" element={<LandForSellDetails />} />
-      <Route path="/boutique" element={<Quincallerie />} />
-      <Route path="/boutique/:id" element={<QuincallerieItemPage />} />
-      <Route path="/a-louer/details/:id" element={<PropertyDetails />} /> */}
-      {/* <Route path="/property-6" element={<PropertySix />} /> */}
-      {/* <Route path="/contact" element={<Contact />} />
-      <Route path="/portifolio" element={<Portifolio />} />
-      <Route path="/portifolio-2" element={<PortifolioTwo />} /> */}
+      <Route path="/testpage" element={<TestPage/>} />
       <Route path="/login" element={<SignIn />} />
       <Route path="/dashboard" element={<Dashboard />} />
       {/* LAND PROPERTIES ROUTE  */}
-      <Route path="/parcelles" element={<LandProperties />} />
+      <Route path="/landproperties" element={<LandProperties />} />
       <Route
-        path="/parcelles/ajouter-une-parcelle"
+        path="/landproperties/new-landproperty"
         element={<AddLandProperty />}
       />
       <Route
-        path="/parcelles/modifier-une-parcelle/:id"
+        path="/landproperties/edit-landproperty/:id"
         element={<EditLandProperty />}
       />
       <Route
-        path="/parcelles/detail-parcelle/:id"
+        path="/landproperties/landproperty-details/:id"
         element={<LandPropertyDetails />}
       />
       {/* LAND PROPERTIES ROUTE  */}
 
       {/* PRODUCTS ROUTE  */}
-      <Route path="/agab-boutique" element={<Products />} />
+      <Route path="/items" element={<Products />} />
       <Route
-        path="/agab-boutique/ajouter-un-produit"
+        path="/items/new-item"
         element={<AddNewProduct />}
       />
       <Route
-        path="/agab-boutique/modifier-cet-produit/:id"
+        path="/items/edit-item/:id"
         element={<EditProduct />}
       />
 
       <Route
-        path="/agab-boutique/detail-du-produit/:id"
+        path="/items/item-details/:id"
         element={<ProductDetails />}
       />
       {/* PRODUCTS ROUTE  */}
 
       {/* PROPERTIES ROUTE  */}
-      <Route path="/agab-proprietes" element={<Property />} />
+      <Route path="/properties" element={<Property />} />
       <Route
-        path="/agab-proprietes/ajouter-une-propriete"
+        path="/properties/new-property"
         element={<AddProperty />}
       />
       <Route
-        path="/agab-proprietes/modifier-cette-propriete/:id"
+        path="/properties/edit-property/:id"
         element={<EditProperty />}
       />
 
       <Route
-        path="/agab-proprietes/detail-du-propriete/:id"
+        path="/properties/property-details/:id"
         element={<PropertyDetails />}
       />
       {/* PROPERTIES ROUTE  */}
 
       {/* USERS ROUTE  */}
-      <Route path="/agab-utilisateur" element={<Users />} />
+      <Route path="/users" element={<Users />} />
       <Route
-        path="/agab-utilisateur/ajouter-un-utilisateur"
+        path="/users/add-user"
         element={<AddNewUser />}
       />
       <Route
-        path="/agab-utilisateur/modifier-cet-utilisateur/:id"
+        path="/users/edit-user/:id"
         element={<EditUser />}
       />
       {/* USERS ROUTE  */}

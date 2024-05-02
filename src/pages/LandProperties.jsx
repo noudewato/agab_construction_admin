@@ -23,10 +23,10 @@ const LandProperties = () => {
     useDeleteLandPropertyMutation();
 
   const deleteHandler = async (id) => {
-    if (window.confirm("etes vous sure de supprimer cette parcelle")) {
+    if (window.confirm("Are you sure you wish to delete?")) {
       try {
         await deleteLandProperty(id);
-        toast.success("parcelle supprimee avec success");
+        toast.success("Deleted successfully");
         refetch();
       } catch (err) {
         toast.error(err?.data?.message || err.error);
@@ -70,7 +70,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Images</div>
+        <div className="text-xl text-dark font-bold">Image</div>
       ),
     },
     {
@@ -84,7 +84,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Nom du parcelle</div>
+        <div className="text-xl text-dark font-bold">Land Tilte</div>
       ),
     },
     {
@@ -94,14 +94,14 @@ const LandProperties = () => {
         return (
           <div className="p-[1px} text-secondary text-lg font-semibold">
             <span className="p-[1px} text-primary text-lg font-semibold">
-              {myCurrency.format(params.row.propertyPrice)}
-            </span>{" "}
-            FCFA
+            GH₵{" "}{myCurrency.format(params.row.propertyPrice)}
+            </span>
+            
           </div>
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Prix</div>
+        <div className="text-xl text-dark font-bold">Price</div>
       ),
     },
     {
@@ -113,7 +113,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Villes/Villages</div>
+        <div className="text-xl text-dark font-bold">City</div>
       ),
     },
     {
@@ -127,7 +127,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Address</div>
+        <div className="text-xl text-dark font-bold">Location</div>
       ),
     },
     {
@@ -136,12 +136,8 @@ const LandProperties = () => {
       width: 150,
       renderCell: (params) => {
         return (
-          <div className="p-[1px] text-white text-sm text-semibold">
-            {params.row.propertyStatus === "A vendre" ? (
-              <div className="p-[4px] bg-secondary rounded-md">A Vendre</div>
-            ) : (
-              <div></div>
-            )}
+          <div className="p-[1px] text-white text-sm text-semibold text-center">
+            <div className="p-[4px] bg-secondary rounded-md">A vendre</div>
           </div>
         );
       },
@@ -160,7 +156,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Type de parcelle</div>
+        <div className="text-xl text-dark font-bold">LandProperty Type</div>
       ),
     },
     {
@@ -176,7 +172,7 @@ const LandProperties = () => {
         );
       },
       renderHeader: () => (
-        <div className="text-xl text-dark font-bold">Cree le</div>
+        <div className="text-xl text-dark font-bold">Created At</div>
       ),
     },
   ];
@@ -189,7 +185,7 @@ const LandProperties = () => {
         return (
           <Box sx={{ display: "flex", gap: "1rem" }}>
             <Link
-              to={`detail-parcelle/${params.row._id}`}
+              to={`landproperty-details/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "blue", fontSize: "1.5rem" }}>
@@ -197,7 +193,7 @@ const LandProperties = () => {
               </Box>
             </Link>
             <Link
-              to={`modifier-une-parcelle/${params.row._id}`}
+              to={`edit-landproperty/${params.row._id}`}
               style={{ textDecoration: "none" }}
             >
               <Box sx={{ color: "green", fontSize: "1.5rem" }}>
@@ -276,10 +272,10 @@ const LandProperties = () => {
             }}
           >
             <Typography variant="h4" sx={{ fontWeight: "600", color: "black" }}>
-              Nos Parcelles
+              Land Properties
             </Typography>
             <Link
-              to="/parcelles/ajouter-une-parcelle"
+              to="/landproperties/new-landproperty"
               style={{ textDecoration: "none" }}
             >
               <Button
@@ -288,7 +284,7 @@ const LandProperties = () => {
                 startIcon={<FiPlus />}
                 sx={{ borderRadius: "20px" }}
               >
-                Ajouter une parcelle
+                Add LandProperty
               </Button>
             </Link>
           </Box>
